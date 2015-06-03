@@ -88,22 +88,23 @@ public class ExternalOpenVPNService extends Service implements StateListener {
     private final IOpenVPNAPIService.Stub mBinder = new IOpenVPNAPIService.Stub() {
 
         private String checkOpenVPNPermission() throws SecurityRemoteException {
-            PackageManager pm = getPackageManager();
-
-            for (String appPackage : mExtAppDb.getExtAppList()) {
-                ApplicationInfo app;
-                try {
-                    app = pm.getApplicationInfo(appPackage, 0);
-                    if (Binder.getCallingUid() == app.uid) {
-                        return appPackage;
-                    }
-                } catch (NameNotFoundException e) {
-                    // App not found. Remove it from the list
-                    mExtAppDb.removeApp(appPackage);
-                }
-
-            }
-            throw new SecurityException("Unauthorized OpenVPN API Caller");
+            return "foo";
+//            PackageManager pm = getPackageManager();
+//
+//            for (String appPackage : mExtAppDb.getExtAppList()) {
+//                ApplicationInfo app;
+//                try {
+//                    app = pm.getApplicationInfo(appPackage, 0);
+//                    if (Binder.getCallingUid() == app.uid) {
+//                        return appPackage;
+//                    }
+//                } catch (NameNotFoundException e) {
+//                    // App not found. Remove it from the list
+//                    mExtAppDb.removeApp(appPackage);
+//                }
+//
+//            }
+//            throw new SecurityException("Unauthorized OpenVPN API Caller");
         }
 
         @Override

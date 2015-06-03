@@ -25,6 +25,7 @@ import android.os.Message;
 import android.text.SpannableString;
 import android.text.format.DateFormat;
 import android.text.style.ImageSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -95,17 +96,14 @@ public class LogFragment extends ListFragment implements StateListener, SeekBar.
 
     @Override
     public void onCheckedChanged(RadioGroup group, int checkedId) {
-        switch (checkedId) {
-            case R.id.radioISO:
-                ladapter.setTimeFormat(LogWindowListAdapter.TIME_FORMAT_ISO);
-                break;
-            case R.id.radioNone:
-                ladapter.setTimeFormat(LogWindowListAdapter.TIME_FORMAT_NONE);
-                break;
-            case R.id.radioShort:
-                ladapter.setTimeFormat(LogWindowListAdapter.TIME_FORMAT_SHORT);
-                break;
-
+        if (checkedId == R.id.radioISO) {
+            ladapter.setTimeFormat(LogWindowListAdapter.TIME_FORMAT_ISO);
+        }
+        else if (checkedId == R.id.radioNone) {
+            ladapter.setTimeFormat(LogWindowListAdapter.TIME_FORMAT_NONE);
+        }
+        else if (checkedId == R.id.radioShort) {
+            ladapter.setTimeFormat(LogWindowListAdapter.TIME_FORMAT_SHORT);
         }
     }
 

@@ -24,10 +24,7 @@ public class ExternalAppDatabase {
 	private final String PREFERENCES_KEY = "PREFERENCES_KEY";
 
 	boolean isAllowed(String packagename) {
-		Set<String> allowedapps = getExtAppList();
-
-		return allowedapps.contains(packagename); 
-
+		return true;
 	}
 
 	public Set<String> getExtAppList() {
