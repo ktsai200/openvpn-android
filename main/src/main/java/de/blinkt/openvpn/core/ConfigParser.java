@@ -6,6 +6,7 @@
 package de.blinkt.openvpn.core;
 
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Pair;
 
 import java.io.BufferedReader;
@@ -653,6 +654,20 @@ public class ConfigParser {
                     conn.mEnabled = false;
         }
 
+        Vector<String> excludedApps = getOption("apps-without-vpn", 0, 32000);
+        if (excludedApps != null && excludedApps.size() > 0) {
+            String exclude = excludedApps.get(1);
+            Log.d("OpenVPN", "ex: "+exclude);
+            if (exclude.startsWith("[[INLINE]]")) {
+                exclude = exclude.substring(10);
+            }
+            for (String app : exclude.split(System.getProperty("line.separator"))) {
+                String appPkg = app.trim();
+                Log.d("OpenVPN", "excluding app " + appPkg);
+                np.mAllowedAppsVpn.add(app);
+            }
+        }
+
         // Parse OpenVPN Access Server extra
         Vector<String> friendlyname = meta.get("FRIENDLY_NAME");
         if (friendlyname != null && friendlyname.size() > 1)
@@ -871,13 +886,13 @@ public class ConfigParser {
         if (args == null)
             return null;
 
-        for (Vector<String> optionline : args)
-
+        for (Vector<String> optionline : args) {
             if (optionline.size() < (minarg + 1) || optionline.size() > maxarg + 1) {
                 String err = String.format(Locale.getDefault(), "Option %s has %d parameters, expected between %d and %d",
                         option, optionline.size() - 1, minarg, maxarg);
                 throw new ConfigParseError(err);
             }
+        }
         options.remove(option);
         return args;
     }
