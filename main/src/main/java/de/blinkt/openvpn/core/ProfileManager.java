@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.preference.PreferenceManager;
+import android.util.Log;
 
 public class ProfileManager {
 	private static final String PREFS_NAME =  "VPNList";
@@ -88,11 +89,8 @@ public class ProfileManager {
 	public static VpnProfile getLastConnectedProfile(Context c, boolean onBoot) {
 		SharedPreferences prefs = PreferenceManager.getDefaultSharedPreferences(c);
 
-		boolean useStartOnBoot = prefs.getBoolean("restartvpnonboot", false);
+		boolean useStartOnBoot = true;
 
-        if (onBoot && !useStartOnBoot)
-            return null;
-		
 		String lastConnectedProfile = prefs.getString(LAST_CONNECTED_PROFILE, null);
 		if(lastConnectedProfile!=null)
 			return get(c, lastConnectedProfile);

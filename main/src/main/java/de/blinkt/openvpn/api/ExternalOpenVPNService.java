@@ -88,7 +88,7 @@ public class ExternalOpenVPNService extends Service implements StateListener {
     private final IOpenVPNAPIService.Stub mBinder = new IOpenVPNAPIService.Stub() {
 
         private String checkOpenVPNPermission() throws SecurityRemoteException {
-            return "foo";
+            return "OK";
 //            PackageManager pm = getPackageManager();
 //
 //            for (String appPackage : mExtAppDb.getExtAppList()) {
