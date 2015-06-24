@@ -654,19 +654,19 @@ public class ConfigParser {
                     conn.mEnabled = false;
         }
 
-        Vector<String> excludedApps = getOption("apps-without-vpn", 0, 32000);
-        if (excludedApps != null && excludedApps.size() > 0) {
-            String exclude = excludedApps.get(1);
-            Log.d("OpenVPN", "ex: "+exclude);
-            if (exclude.startsWith("[[INLINE]]")) {
-                exclude = exclude.substring(10);
-            }
-            for (String app : exclude.split(System.getProperty("line.separator"))) {
-                String appPkg = app.trim();
-                Log.d("OpenVPN", "excluding app " + appPkg);
-                np.mAllowedAppsVpn.add(app);
-            }
-        }
+        // Vector<String> excludedApps = getOption("apps-without-vpn", 0, 32000);
+        // if (excludedApps != null && excludedApps.size() > 0) {
+        //     String exclude = excludedApps.get(1);
+        //     Log.d("OpenVPN", "ex: "+exclude);
+        //     if (exclude.startsWith("[[INLINE]]")) {
+        //         exclude = exclude.substring(10);
+        //     }
+        //     for (String app : exclude.split(System.getProperty("line.separator"))) {
+        //         String appPkg = app.trim();
+        //         Log.d("OpenVPN", "excluding app " + appPkg);
+        //         np.mAllowedAppsVpn.add(app);
+        //     }
+        // }
 
         // Parse OpenVPN Access Server extra
         Vector<String> friendlyname = meta.get("FRIENDLY_NAME");
@@ -898,7 +898,3 @@ public class ConfigParser {
     }
 
 }
-
-
-
-

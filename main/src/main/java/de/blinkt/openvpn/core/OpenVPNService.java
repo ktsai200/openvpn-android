@@ -137,6 +137,7 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
     }
 
     private void showNotification(String msg, String tickerText, boolean lowpriority, long when, ConnectionStatus status) {
+        //Log.d("OpenVPN", "msg: "+msg + lowpriority + when + status);
         String ns = Context.NOTIFICATION_SERVICE;
         NotificationManager mNotificationManager = (NotificationManager) getSystemService(ns);
 
@@ -146,14 +147,14 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
         android.app.Notification.Builder nbuilder = new Notification.Builder(this);
 
         if (mProfile != null)
-            nbuilder.setContentTitle(getString(R.string.notifcation_title, mProfile.mName));
+            nbuilder.setContentTitle("VPN Connection");
         else
-            nbuilder.setContentTitle(getString(R.string.notifcation_title_notconnect));
+            nbuilder.setContentTitle("VPN not connected");
 
         nbuilder.setContentText(msg);
         nbuilder.setOnlyAlertOnce(true);
         nbuilder.setOngoing(true);
-        nbuilder.setContentIntent(getLogPendingIntent());
+        //nbuilder.setContentIntent(getLogPendingIntent());
         nbuilder.setSmallIcon(icon);
 
 
@@ -216,21 +217,21 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
             disconnectVPN.setAction(DISCONNECT_VPN);
             PendingIntent disconnectPendingIntent = PendingIntent.getActivity(this, 0, disconnectVPN, 0);
 
-            nbuilder.addAction(android.R.drawable.ic_menu_close_clear_cancel,
-                    getString(R.string.cancel_connection), disconnectPendingIntent);
+//            nbuilder.addAction(android.R.drawable.ic_menu_close_clear_cancel,
+//                    getString(R.string.cancel_connection), disconnectPendingIntent);
 
             Intent pauseVPN = new Intent(this, OpenVPNService.class);
             if (mDeviceStateReceiver == null || !mDeviceStateReceiver.isUserPaused()) {
                 pauseVPN.setAction(PAUSE_VPN);
                 PendingIntent pauseVPNPending = PendingIntent.getService(this, 0, pauseVPN, 0);
-                nbuilder.addAction(android.R.drawable.ic_media_pause,
-                        getString(R.string.pauseVPN), pauseVPNPending);
+                //nbuilder.addAction(android.R.drawable.ic_media_pause,
+                //        getString(R.string.pauseVPN), pauseVPNPending);
 
             } else {
                 pauseVPN.setAction(RESUME_VPN);
                 PendingIntent resumeVPNPending = PendingIntent.getService(this, 0, pauseVPN, 0);
-                nbuilder.addAction(android.R.drawable.ic_media_play,
-                        getString(R.string.resumevpn), resumeVPNPending);
+                //nbuilder.addAction(android.R.drawable.ic_media_play,
+                //        getString(R.string.resumevpn), resumeVPNPending);
             }
 
 
