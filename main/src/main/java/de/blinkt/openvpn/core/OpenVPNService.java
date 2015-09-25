@@ -628,7 +628,7 @@ public class OpenVPNService extends VpnService implements StateListener, Callbac
         mLocalIPv6 = null;
         mDomain = null;
 
-        builder.setConfigureIntent(getLogPendingIntent());
+        // builder.setConfigureIntent(getLogPendingIntent());
 
         try {
             //Debug.stopMethodTracing();
